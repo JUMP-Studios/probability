@@ -1,0 +1,52 @@
+{
+  "name": "@jumpstudios/probability",
+	"version": "1.2.2",
+	"description": "Provides a set of probability utility functions for performing calculations and operations related to probability and statistics.",
+	"main": "./out/init.lua",
+	"keywords": [
+		"roblox",
+		"probability",
+		"typescript",
+		"roblox-ts",
+		"rbxtsc",
+		"ts"
+	],
+  "author": "Icejiynn",
+  "license": "MIT",
+  "scripts": {
+    "build": "rbxtsc",
+    "watch": "rbxtsc -w",
+    "prepublishOnly": "yarn run build",
+    "release:major": "for /f %i in ('npx semver %npm_package_version% -i major') do npm version %i && npm publish --tag latest",
+    "release:minor": "for /f %i in ('npx semver %npm_package_version% -i minor') do npm version %i && npm publish --tag latest",
+    "release:patch": "for /f %i in ('npx semver %npm_package_version% -i patch') do npm version %i && npm publish --tag latest"
+  },
+  "types": "out/index.d.ts",
+  "files": [
+    "out",
+    "!**/*.tsbuildinfo"
+  ],
+  "repository": {
+    "url": "https://github.com/JUMP-Studios/probability.git",
+    "type": "git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@rbxts/compiler-types": "^2.1.0-types.1",
+    "@rbxts/types": "^1.0.704",
+    "@typescript-eslint/eslint-plugin": "^5.61.0",
+    "@typescript-eslint/parser": "^5.61.0",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-roblox-ts": "^0.0.35",
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6",
+    "semver": "^7.5.3"
+  },
+  "dependencies": {
+    "@rbxts/object-utils": "^1.0.4"
+  }
+}
