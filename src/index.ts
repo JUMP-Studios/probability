@@ -1,5 +1,7 @@
+import weight from "./weight";
+
 const Probability = {
-	Weight: import("./weight").expect(),
+	weight
 };
 
 export = Probability;

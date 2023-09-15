@@ -1,13 +1,20 @@
 import Object from "@rbxts/object-utils";
 
-type ProbabilityObject = Record<string, number> | Map<string, number>
+export type ProbabilityObject = Record<string, Probability>
+type Probability = number | {
+	probability: number
+}
 
-export = {
+function getWeight(weightObject: Probability) {
+	return typeIs(weightObject, "table") ?  weightObject.probability : weightObject
+}
+
+export default {
 	random: (entries: ProbabilityObject) => {
 		let randomNumber = new Random().NextNumber()
 
-		for (const [key, weight] of Object.entries(entries as Record<string, number> )) {
-			randomNumber -= weight;
+		for (const [key, weight] of Object.entries(entries)) {
+			randomNumber -= getWeight(weight);
 
 			if (randomNumber <= 0) {
 				return key;
@@ -18,8 +25,8 @@ export = {
 		const result = [] as Array<keyof E> 
 		const random = new Random()
 
-		for (const [key, weight] of Object.entries(entries as Record<string, number>)) {
-			if (random.NextNumber() <= weight) {
+		for (const [key, weight] of Object.entries(entries as ProbabilityObject)) {
+			if (random.NextNumber() <= getWeight(weight)) {
 				result.push(key as keyof E);
 			}
 		}
