@@ -1,6 +1,6 @@
 {
   "name": "@jumpstudios/probability",
-  "version": "1.2.7",
+  "version": "1.2.8",
   "description": "Provides a set of probability utility functions for performing calculations and operations related to probability and statistics.",
   "main": "./out/init.lua",
   "keywords": [
