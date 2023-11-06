@@ -8,4 +8,4 @@ function filterByThreshold(probabilities: Array<[string, number]>, random: Rando
 	return probabilities.filter((_key,probability) => random.NextNumber(0, probability) > probability);
 }
 
-export default {filterByThreshold}
+export {filterByThreshold}

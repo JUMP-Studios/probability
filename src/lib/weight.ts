@@ -49,4 +49,4 @@ function getRandomEntries<E extends WeightObject>(entries: E) {
 	return result
 }
 
-export default {random, getRandomEntries, skew};
+export {random, getRandomEntries, skew};
