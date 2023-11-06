@@ -2,27 +2,29 @@ import Object from "@rbxts/object-utils";
 
 type WeightObject = Record<string, number>
 
-function skew(baseRates: WeightObject, luckFactor: number) {
-	// [-1,1]
-	luckFactor = math.min(1, math.max(-1, luckFactor));
-
-    const skewedRates: Record<string, number> = {};
-	const keys = Object.keys(baseRates)
+function skew(rates:WeightObject, factor: number) {
+	const keys = Object.keys(rates)
+	const skewedRates = {} as WeightObject;
   
-	keys.forEach((key) => {
-		const originalRate = baseRates[key];
-		const newRate = originalRate * (1 + luckFactor);
-		skewedRates[key] = math.max(0, newRate); // Ensure rates are non-negative
+	// Base factor to adjust the weights
+	const baseFactor = 1 + factor;
+  
+	// Apply the skewing factor to each entry's weight
+	Object.entries(rates).forEach(([entry, value]) => {
+		const newWeight = value ** baseFactor;
+		skewedRates[entry] = newWeight;
 	})
   
-	// Normalize the probabilities to ensure they still sum up to 1
-    const totalRate = Object.values(skewedRates).reduce((total, rate) => total + rate, 0);
+	// Calculate the new total weight after skewing
+	const newTotalWeight = Object.values(skewedRates).reduce((total, rate) => total + rate, 0);
+  
+	// Normalize the skewed rates to ensure they add up to 1
 	keys.forEach((entry) => {
-		skewedRates[entry] /= totalRate;
+		skewedRates[entry] /= newTotalWeight;
 	})
   
 	return skewedRates;
-}
+  }
   
 function random<E extends WeightObject>(entries: E) {
 	const totalWeight = Object.values(entries as WeightObject).reduce((sum, rate) => sum + rate, 0);
