@@ -6,17 +6,18 @@ function skew(baseRates: WeightObject, luckFactor: number) {
 	const skewedRates = { ...baseRates };
 	const totalWeight = Object.values(skewedRates).reduce((sum, rate) => sum + rate, 0); // Total weight of all entries
 	const adjustmentFactor = luckFactor ** 2; // Calculate the factor to adjust the probabilities
+	const keys = Object.keys(skewedRates)
   
 	// Adjust the probabilities of each entry
-	for (const entry in skewedRates) {
-	  	skewedRates[entry] *= adjustmentFactor;
-	}
+	keys.forEach((entry) => {
+		skewedRates[entry] *= adjustmentFactor;
+	})
   
 	// Normalize the probabilities to ensure they still sum up to 1
 	const normalizedTotalWeight = Object.values(skewedRates).reduce((sum, rate) => sum + rate, 0);
-	for (const entry in skewedRates) {
-	  skewedRates[entry] /= normalizedTotalWeight / totalWeight;
-	}
+	keys.forEach((entry) => {
+		skewedRates[entry] /= normalizedTotalWeight / totalWeight;
+	})
   
 	return skewedRates;
 }
