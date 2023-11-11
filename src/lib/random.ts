@@ -5,7 +5,7 @@
  * @returns {Array<[string, { probability: number }]>} - Filtered array of items.
  */
 function filterByThreshold(probabilities: Array<[string, number]>, random: Random) {
-	return probabilities.filter(([_key,probability]) => random.NextNumber(0, probability) > probability);
+	return probabilities.filter(([_key,probability]) => random.NextNumber(0, probability) < probability);
 }
 
 export {filterByThreshold}
